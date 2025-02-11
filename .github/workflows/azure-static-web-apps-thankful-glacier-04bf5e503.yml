@@ -34,7 +34,7 @@ jobs:
 
       - name: Deploy to Azure Static Web Apps
         id: builddeploy
-        uses: Azure/azure-static-web-apps-thankful-glacier-04bf5e503@v1
+        uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_GLACIER_04BF5E503 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
     steps:
       - name: Close Pull Request
         id: closepullrequest
-        uses: Azure/azure-static-web-apps-thankful-glacier-04bf5e503@v1
+        uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_GLACIER_04BF5E503 }}
           action: "close"
