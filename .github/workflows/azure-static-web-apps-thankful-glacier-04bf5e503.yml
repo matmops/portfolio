@@ -41,7 +41,7 @@ jobs:
           action: "upload"
           app_location: "/" # Your Next.js root directory
           api_location: "" # Not using APIs
-          output_location: ".next/static" # Correct Next.js output folder
+          output_location: ".next" # Correct Next.js output folder
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
