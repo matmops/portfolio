@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import eventBus from '../EventBus';
+import HamsterLoader from './HamsterLoader';
+import StartBackgroundLoader from './StartBackgroundLoader';
 
 type LoadingProps = {};
 
@@ -12,6 +14,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
     const [startPopupOpacity, setStartPopupOpacity] = useState(0);
     const [firefoxPopupOpacity, setFirefoxPopupOpacity] = useState(0);
     const [webGLErrorOpacity, setWebGLErrorOpacity] = useState(0);
+    const [hamsterOpacity, setHamsterOpacity] = useState(1);
 
     const [showBiosInfo, setShowBiosInfo] = useState(false);
     const [showLoadingResources, setShowLoadingResources] = useState(false);
@@ -69,6 +72,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
 
             setTimeout(() => {
                 setLoadingTextOpacity(0);
+                setHamsterOpacity(0); // Trigger hamster fade-out
                 setTimeout(() => {
                     setStartPopupOpacity(1);
                 }, 500);
@@ -136,126 +140,49 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                     <span className="blinking-cursor" />
                 </div>
             )}
-            {!webGLError && (
-                <div
-                    style={Object.assign({}, styles.overlayText, {
-                        opacity: loadingTextOpacity,
-                    })}
-                >
-                    <div
-                        style={styles.header}
-                        className="loading-screen-header"
-                    >
-                        <div style={styles.logoContainer}>
-                            <div>
-                                <p style={styles.green}>
-                                    <b>Labban,</b>{' '}
-                                </p>
-                                <p style={styles.green}>
-                                    <b>Mathéo Inc.</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div style={styles.headerInfo}>
-                            <p>Released: 01/13/2000</p>
-                            <p>HHBIOS (C)2000 Labban Mathéo Inc.,</p>
-                        </div>
-                    </div>
-                    <div style={styles.body} className="loading-screen-body">
-                        <p>HSP S13 2000-2022 Special UC131S</p>
-                        <div style={styles.spacer} />
-                        {showBiosInfo && (
-                            <>
-                                <p>HSP Showcase(tm) XX 113</p>
-                                <p>Checking RAM : {14000} OK</p>
-                                <div style={styles.spacer} />
-                                <div style={styles.spacer} />
-                                {showLoadingResources ? (
-                                    progress == 1 ? (
-                                        <p>FINISHED LOADING RESOURCES</p>
-                                    ) : (
-                                        <p className="loading">
-                                            LOADING RESOURCES ({loaded}/
-                                            {toLoad === 0 ? '-' : toLoad})
-                                        </p>
-                                    )
-                                ) : (
-                                    <p className="loading">WAIT</p>
-                                )}
-                            </>
-                        )}
-                        <div style={styles.spacer} />
-                        <div style={styles.resourcesLoadingList}>
-                            {resources.map((sourceName) => (
-                                <p key={sourceName}>{sourceName}</p>
-                            ))}
-                        </div>
-                        <div style={styles.spacer} />
-                        {showLoadingResources && doneLoading && (
-                            <p>
-                                All Content Loaded, launching{' '}
-                                <b style={styles.green}>
-                                    'Mathéo Labban Portfolio Showcase'
-                                </b>{' '}
-                                V1.0
-                            </p>
-                        )}
-                        <div style={styles.spacer} />
-                        <span className="blinking-cursor" />
-                    </div>
-                    <div
-                        style={styles.footer}
-                        className="loading-screen-footer"
-                    >
-                        <p>
-                            Press <b>DEL</b> to enter SETUP , <b>ESC</b> to skip
-                            memory test
-                        </p>
-                        <p>{getCurrentDate()}</p>
-                    </div>
-                </div>
-            )}
+            <div style={{ ...styles.hamsterContainer, opacity: hamsterOpacity }}>
+                <HamsterLoader />
+            </div>
             <div
                 style={Object.assign({}, styles.popupContainer, {
                     opacity: startPopupOpacity,
                 })}
             >
-                <div style={styles.startPopup}>
-                    <p style={styles.red}>
-                        <b>THIS SITE IS CURRENTLY A W.I.P.</b>
-                    </p>
-                    <p>But do enjoy what I have done so far :)</p>
-                    <div style={styles.spacer} />
-                    <div style={styles.spacer} />
-                    <p>Mathéo Labban Portfolio Showcase 2025</p>
-                    {mobileWarning && (
-                        <>
-                            <br />
-                            <b>
-                                <p style={styles.warning}>
-                                    WARNING: This experience is best viewed on
-                                </p>
-                                <p style={styles.warning}>
-                                    a desktop or laptop computer.
-                                </p>
-                            </b>
-                            <br />
-                        </>
-                    )}
-                    <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-                        <p>Click start to begin{'\xa0'}</p>
-                        <span className="blinking-cursor" />
-                    </div>
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            marginTop: '16px',
-                        }}
-                    >
-                        <div className="bios-start-button" onClick={start}>
-                            <p>START</p>
+                <div style={styles.startPopupWrapper}>
+                    <StartBackgroundLoader />
+                    <div style={styles.startPopupContent}>
+                        <p style={styles.red}>
+                            <b>THIS SITE IS CURRENTLY A W.I.P.</b>
+                        </p>
+                        <p>But do enjoy what I have done so far :)</p>
+                        <div style={styles.spacer} />
+                        <div style={styles.spacer} />
+                        <p>Mathéo Labban Portfolio Showcase 2025</p>
+                        {mobileWarning && (
+                            <>
+                                <br />
+                                <b>
+                                    <p style={styles.warning}>
+                                        WARNING: This experience is best viewed on
+                                    </p>
+                                    <p style={styles.warning}>
+                                        a desktop or laptop computer.
+                                    </p>
+                                </b>
+                                <br />
+                            </>
+                        )}
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginTop: '16px',
+                            }}
+                        >
+                            <div className="bios-start-button" onClick={start}>
+                                <p>START</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -341,6 +268,19 @@ const styles: StyleSheetCSS = {
         boxSizing: 'border-box',
         padding: 48,
     },
+    startPopupWrapper: {
+        position: 'relative',
+        width: '100%',
+        maxWidth: 500,
+        textAlign: 'center',
+    },
+    startPopupContent: {
+        position: 'relative',
+        zIndex: 1, // bring content above the background loader
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        padding: 24,
+        border: '7px solid #fff',
+    },
     startPopup: {
         backgroundColor: '#000',
         padding: 24,
@@ -395,6 +335,13 @@ const styles: StyleSheetCSS = {
     footer: {
         boxSizing: 'border-box',
         width: '100%',
+    },
+    hamsterContainer: {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        transition: 'opacity 1s ease',
     },
 };
 
