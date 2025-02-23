@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StartBackgroundLoader = () => {
+const SpinningLeaf = () => {
   return (
     <StyledWrapper>
       <div className="loader">
@@ -231,4 +231,4 @@ const StyledWrapper = styled.div`
 }
 `;
 
-export default StartBackgroundLoader;
+export default SpinningLeaf;

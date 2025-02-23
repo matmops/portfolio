@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import eventBus from '../EventBus';
 import HamsterLoader from './HamsterLoader';
-import StartBackgroundLoader from './StartBackgroundLoader';
+import StartBackgroundLoader from './SpinningLeaf';
+import SpinningLeaf from './SpinningLeaf';
 
 type LoadingProps = {};
 
@@ -149,7 +150,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                 })}
             >
                 <div style={styles.startPopupWrapper}>
-                    <StartBackgroundLoader />
+                    <SpinningLeaf />
                     <div style={styles.startPopupContent}>
                         <p style={styles.red}>
                             <b>THIS SITE IS CURRENTLY A W.I.P.</b>
