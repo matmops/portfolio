@@ -184,7 +184,7 @@ export default class MonitorScreen extends EventEmitter {
 
         // Set iframe attributes
         // PROD
-        iframe.src = 'https://the2dportfolio.vercel.app'; //https://the2dportfolio.vercel.app/
+        iframe.src = ''; //https://the2dportfolio.vercel.app/
         /**
          * Use dev server is query params are present
          *
