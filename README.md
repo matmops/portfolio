@@ -1,6 +1,6 @@
 # matheolabban.com
 
-This is one of two repositories created for my portfolio website. Thanks for taking the time to check this out. If you have any questions or comments, feel free to shoot me an email at <samp><a href="mailto:matheo.labban@gmail.com">matheo.labban@gmail.com</a></samp>.
+This is one of two repositories created for my portfolio website. Thanks for taking the time to check this out.
 
 <br>
 
